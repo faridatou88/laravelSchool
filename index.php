@@ -32,7 +32,7 @@
       <nav>
         <a href="view/students/" class="text-white me-3">inscription</a>
         <a href="view/teachers/" class="text-white me-3">enseignants</a>
-        <a href="view/salles/" class="text-white">salles</a>
+        <a href="view/salles/" class="text-white me-3">salles</a>
         <a href="view/cours/" class="text-white">cours</a>
         
       </nav>
