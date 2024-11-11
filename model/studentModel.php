@@ -1,6 +1,7 @@
 <?php
 require_once("config/provider.php");
-class students {
+
+class Students {
     private $connexion;
 
     function __construct(){
@@ -9,36 +10,69 @@ class students {
         $this->connexion = $db->connect();
     }
 
-    public function inscription($matricule,$nom,$prenom,$datenaiss,$lieunaiss,$sexe,$nationality,$adresse,$numtel,$idsalle){
-        $inscription = $connexion->prepare("INSERT INTO students (studentMat,nom,prenom,datenaiss,lieunaiss,sexe,nationality,adresse,numtel,idsalle)VALUES(:studentMat,:nom,:prenom,:datenaiss,:lieunaiss,:sexe,:nationality,:adresse,:numtel,:idsalle");
-        $add=$inscription->execute([
+    // Inscription d'un étudiant
+    public function inscription($matricule, $nom, $prenom, $datenaiss, $lieunaiss, $sexe, $nationality, $adresse, $numtel, $idsalle) {
+        $query = "INSERT INTO students (studentMat, nom, prenom, datenaiss, lieunaiss, sexe, nationality, adresse, numTel, idsalle)
+                  VALUES (:studentMat, :nom, :prenom, :datenaiss, :lieunaiss, :sexe, :nationality, :adresse, :numtel, :idsalle)";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->execute([
             "studentMat" => $matricule,
-            "nom"=> $nom,
-            "prenom"=> $prenom,
-            "datenaiss"=> $datenaiss,
-            "lieunaiss"=> $lieunaiss,
-            "sexe"=> $sexe,
-            "nationality"=> $nationality,
-            "adresse"=> $adresse,
-            "numtel"=> $numtel,
-            "idsalle"=> $idsalle,
-
+            "nom" => $nom,
+            "prenom" => $prenom,
+            "datenaiss" => $datenaiss,
+            "lieunaiss" => $lieunaiss,
+            "sexe" => $sexe,
+            "nationality" => $nationality,
+            "adresse" => $adresse,
+            "numtel" => $numtel,
+            "idsalle" => $idsalle
         ]);
+        return $stmt->rowCount(); // Retourne 1 si l'ajout a été réussi
+    }
+
+    // Récupérer tous les étudiants
+    public function getAllStudents() {
+        $query = "SELECT * FROM students";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Récupérer un étudiant par ID
+    public function getStudentById($id) {
+        $query = "SELECT * FROM students WHERE idStudent = :id";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    // Mettre à jour les informations d'un étudiant
+    public function updateStudent($id, $matricule, $nom, $prenom, $datenaiss, $lieunaiss, $sexe, $nationality, $adresse, $numtel, $idsalle) {
+        $query = "UPDATE students SET studentMat = :studentMat, nom = :nom, prenom = :prenom, datenaiss = :datenaiss,
+                  lieunaiss = :lieunaiss, sexe = :sexe, nationality = :nationality, adresse = :adresse, numTel = :numtel, 
+                  idsalle = :idsalle WHERE idStudent = :id";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->execute([
+            "studentMat" => $matricule,
+            "nom" => $nom,
+            "prenom" => $prenom,
+            "datenaiss" => $datenaiss,
+            "lieunaiss" => $lieunaiss,
+            "sexe" => $sexe,
+            "nationality" => $nationality,
+            "adresse" => $adresse,
+            "numtel" => $numtel,
+            "idsalle" => $idsalle,
+            "id" => $id
+        ]);
+        return $stmt->rowCount(); // Retourne 1 si la mise à jour a été réussie
+    }
+
+    // Supprimer un étudiant
+    public function deleteStudent($id) {
+        $query = "DELETE FROM students WHERE idStudent = :id";
+        $stmt = $this->connexion->prepare($query);
+        $stmt->execute(['id' => $id]);
+        return $stmt->rowCount(); // Retourne 1 si la suppression a été réussie
     }
 }
-
-+-------------+-------------+------+-----+-------------------+----------------+
-| Field       | Type        | Null | Key | Default           | Extra          |
-+-------------+-------------+------+-----+-------------------+----------------+
-| idStudent   | int(11)     | NO   | PRI | NULL              | auto_increment |
-| studentMat  | varchar(20) | NO   | UNI | NULL              |                |
-| nom         | varchar(40) | NO   |     | NULL              |                |
-| prenom      | varchar(40) | NO   |     | NULL              |                |
-| datenaiss   | date        | NO   |     | NULL              |                |
-| lieunaiss   | varchar(30) | NO   |     | NULL              |                |
-| nationality | varchar(35) | NO   |     | nigerienne        |                |
-| adresse     | varchar(30) | NO   |     | NULL              |                |
-| numTel      | varchar(30) | NO   | UNI | NULL              |                |
-| created_at  | timestamp   | NO   |     | CURRENT_TIMESTAMP |                |
-| idsalle     | int(11)     | YES  | MUL | NULL              |                |
-+-------------+-------------+------+-----+-------------------+----------------+
