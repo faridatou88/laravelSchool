@@ -50,7 +50,7 @@
   <section class="py-5">
     <div class="container">
       <div class="row text-center">
-        <h2 class="mb-4">Fonctionnalités Principales</h2>
+        <h2 class="mb-4">Fonctionnalités Princi pales</h2>
         <div class="col-md-4 mb-4">
           <div class="card shadow-sm p-4">
             <div class="icon-box mb-3">
