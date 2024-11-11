@@ -30,9 +30,11 @@
     <div class="container d-flex justify-content-between align-items-center">
       <h1 class="h3">Gestion d'École</h1>
       <nav>
-        <a href="#" class="text-white me-3">Accueil</a>
-        <a href="#" class="text-white me-3">Fonctionnalités</a>
-        <a href="#" class="text-white">Contact</a>
+        <a href="view/students/" class="text-white me-3">inscription</a>
+        <a href="view/teachers/" class="text-white me-3">enseignants</a>
+        <a href="view/salles/" class="text-white">salles</a>
+        <a href="view/cours/" class="text-white">cours</a>
+        
       </nav>
     </div>
   </header>
