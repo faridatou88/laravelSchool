@@ -1,9 +1,14 @@
 <?php
 require_once __DIR__ . '/../../config/provider.php';
 require_once __DIR__ . '/../../model/sallesModel.php';
+require_once __DIR__ . '/../../model/coursModel.php';
+
 
 $salle = new Salle();
 $SalleData = $salle->getAllSalles();
+
+$cours = new Cours();
+$coursData = $cours->getAllCours();
 ?>
 
 <!DOCTYPE html>
@@ -59,10 +64,11 @@ $SalleData = $salle->getAllSalles();
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody>\
+         <?php foreach ($coursData as $cours): ?>
         <!-- Les lignes des cours seront insérées ici dynamiquement via PHP -->
         <tr>
-          <td>1</td>
+          <td><?=$cours['idCours']?></td>
           <td>Mathématiques</td>
           <td>3</td>
           <td>101</td>
@@ -76,6 +82,7 @@ $SalleData = $salle->getAllSalles();
             </button>
           </td>
         </tr>
+        <?php endforeach; ?>
       </tbody>
     </table>
   </div>
