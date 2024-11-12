@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/../../config/provider.php';
 require_once __DIR__ . '/../../model/sallesModel.php';
-
+require_once __DIR__ . '/../../model/studentModel.php';
 
 
 // Charger les salles disponibles pour la sélection dynamique
@@ -9,7 +9,8 @@ $salle = new Salle();
 $SalleData = $salle->getAllSalles();
 
 // Charger les étudiants
-
+$studentModel = new Students();
+$studentsData = $studentModel->getAllStudents();
 ?>
 
 <!DOCTYPE html>
