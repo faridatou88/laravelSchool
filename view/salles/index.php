@@ -80,16 +80,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="salleForm" action="/LARAVELSCHOOL/laravelSchool/controllers/sallectrl.php" method="POST">
+          <form id="salleForm" action="../../controllers/sallectrl.php" method="POST">
             <div class="mb-3">
               <label for="roomName" class="form-label">Nom de la Salle</label>
-              <input type="text" class="form-control" id="nomSalle" required>
+              <input type="text" class="form-control" id="nomSalle" name="nomSalle" required>
             </div>
             <div class="mb-3">
               <label for="roomNumber" class="form-label">Numéro de Salle</label>
-              <input type="text" class="form-control" id="numSalle" required>
+              <input type="text" class="form-control" id="numSalle" name="numSalle" required>
             </div>
-            <button type="submit" name="addclass" class="btn btn-primary">Ajouter</button>
+            <input type="submit" name="addSalle" value="ajouter">
           </form>
         </div>
       </div>

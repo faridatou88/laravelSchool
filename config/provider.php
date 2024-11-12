@@ -1,4 +1,4 @@
-<?php
+`<?php
 
 class Database {
     private static $host = 'localhost';
@@ -12,7 +12,6 @@ class Database {
             // Créer une nouvelle connexion PDO
             $pdo = new PDO("mysql:host=" . self::$host . ";dbname=" . self::$dbname . ";charset=utf8", self::$username, self::$password);
             // Définir le mode d'erreur de PDO
-            echo "hello";
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $pdo;
         } catch (PDOException $e) {
@@ -22,6 +21,5 @@ class Database {
     }
 }
 
-$p = new Database();
-$p-> connect(); 
-?>
+// Appeler la méthode statique sans instancier la classe
+$db = Database::connect();

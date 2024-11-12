@@ -1,17 +1,16 @@
 <?php
-require_once("config/provider.php");
+require_once __DIR__ . '/../config/provider.php';
 
 class Salle {
     private $connexion;
 
-    function __construct(){
-        $db = new Database();
-        $this->connexion = $db->connect();
+    public function __construct(){
+        $this->connexion = Database::connect(); // Appel direct de la méthode statique
     }
 
     // Ajouter une salle
     public function addSalle($nom, $numSalle) {
-        $query = "INSERT INTO salle (nom, numSalle) VALUES (:nom, :numSalle)";
+        $query = "INSERT INTO salle(nom, numSalle) VALUES (:nom, :numSalle)";
         $stmt = $this->connexion->prepare($query);
         $stmt->execute([
             "nom" => $nom,
