@@ -1,22 +1,24 @@
 <?php
-require_once("config/provider.php");
+require_once __DIR__ . '/../config/provider.php';
+require_once __DIR__ . '/../controllers/sallectrl.php';
+require_once __DIR__ . '/../model/sallesModel.php';
 
 class Cours {
     private $connexion;
 
     function __construct(){
         $db = new Database();
-        $this->connexion = $db->connect();
+        $this->connexion = Database::connect();
     }
 
     // Ajouter un cours
     public function addCours($nomCours, $nbreHeure, $idsalle) {
-        $query = "INSERT INTO cours (nomCours, nbreHeure, idsalle) VALUES (:nomCours, :nbreHeure, :idsalle)";
+        $query = "INSERT INTO cours(nomCours, nbreHeure, idsalle) VALUES (:nomCours, :nbreHeure, :idsalle)";
         $stmt = $this->connexion->prepare($query);
         $stmt->execute([
-            "nomCours" => $nomCours,
-            "nbreHeure" => $nbreHeure,
-            "idsalle" => $idsalle
+            ":nomCours" => $nomCours,
+            ":nbreHeure" => $nbreHeure,
+            ":idsalle" => $idsalle
         ]);
         return $stmt->rowCount();
     }

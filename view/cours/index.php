@@ -1,8 +1,7 @@
-<?php
+<?php 
 require_once __DIR__ . '/../../config/provider.php';
 require_once __DIR__ . '/../../model/sallesModel.php';
 require_once __DIR__ . '/../../model/coursModel.php';
-
 
 $salle = new Salle();
 $SalleData = $salle->getAllSalles();
@@ -64,15 +63,14 @@ $coursData = $cours->getAllCours();
           <th>Actions</th>
         </tr>
       </thead>
-      <tbody>\
+      <tbody>
          <?php foreach ($coursData as $cours): ?>
-        <!-- Les lignes des cours seront insérées ici dynamiquement via PHP -->
         <tr>
-          <td><?=$cours['idCours']?></td>
-          <td>Mathématiques</td>
-          <td>3</td>
-          <td>101</td>
-          <td>2024-11-11 10:00:00</td>
+          <td><?= htmlspecialchars($cours['idCours']) ?></td>
+          <td><?= htmlspecialchars($cours['nomCours']) ?></td>
+          <td><?= htmlspecialchars($cours['nbreHeure']) ?></td>
+          <td><?= htmlspecialchars($cours['idsalle']) ?></td>
+          <td><?= htmlspecialchars($cours['created_at']) ?></td>
           <td>
             <button class="btn btn-sm btn-warning">
               <i class="bi bi-pencil-fill"></i> Modifier
@@ -110,7 +108,7 @@ $coursData = $cours->getAllCours();
               <select class="form-select" id="idsalle" name="idsalle">
                 <option value="" selected>Aucune</option>
                 <?php foreach ($SalleData as $salle): ?>
-                  <option value="<?= $salle['idsalle']; ?>"><?= $salle['idsalle'] . ' - ' . htmlspecialchars($salle['nom'] . ' ' . $salle['numSalle']); ?></option>
+                  <option value="<?= htmlspecialchars($salle['idsalle']); ?>"><?= htmlspecialchars($salle['idsalle'] . ' - ' . $salle['nom'] . ' ' . $salle['numSalle']); ?></option>
                 <?php endforeach; ?>
               </select>
             </div>
@@ -122,16 +120,5 @@ $coursData = $cours->getAllCours();
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Placeholder pour gérer la soumission du formulaire
-    document.getElementById('addCourse').addEventListener('submit', function(event) {
-      event.preventDefault();
-      alert('Nouvelle salle ajoutée avec succès!');
-      // Insère le code ici pour ajouter la salle via PHP ou JavaScript dynamique
-      // Ferme le modal après la soumission
-      const modal = bootstrap.Modal.getInstance(document.getElementById('addCourse'));
-      modal.hide();
-    });
-  </script>
 </body>
 </html>
