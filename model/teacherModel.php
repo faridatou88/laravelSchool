@@ -1,5 +1,5 @@
 <?php
-require_once("config/provider.php");
+require_once __DIR__ . '/../config/provider.php';
 
 class Teacher {
     private $connexion;
@@ -10,16 +10,15 @@ class Teacher {
     }
 
     // Ajouter un enseignant
-    public function addTeacher($teacherMat, $nom, $prenom, $datenaiss, $genre, $adresse, $numtel, $idsalle) {
-        $query = "INSERT INTO teachers (teacherMat, nom, prenom, datenaiss, genre, adresse, numTel, idsalle)
-                  VALUES (:teacherMat, :nom, :prenom, :datenaiss, :genre, :adresse, :numtel, :idsalle)";
+    public function addTeacher($teacherMat, $nom, $prenom, $datenaiss, $adresse, $numtel, $idsalle) {
+        $query = "INSERT INTO teachers (teacherMat, nom, prenom, datenaiss, adresse, numTel, idsalle)
+                  VALUES (:teacherMat, :nom, :prenom, :datenaiss, :adresse, :numtel, :idsalle)";
         $stmt = $this->connexion->prepare($query);
         $stmt->execute([
             "teacherMat" => $teacherMat,
             "nom" => $nom,
             "prenom" => $prenom,
             "datenaiss" => $datenaiss,
-            "genre" => $genre,
             "adresse" => $adresse,
             "numtel" => $numtel,
             "idsalle" => $idsalle

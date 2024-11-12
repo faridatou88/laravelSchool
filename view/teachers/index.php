@@ -1,3 +1,10 @@
+<?php
+require_once __DIR__ . '/../../config/provider.php';
+require_once __DIR__ . '/../../model/sallesModel.php';
+$salle = new Salle();
+$SalleData = $salle->getAllSalles();
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -33,7 +40,6 @@
   <div class="container table-container">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <h2 class="text-primary">Gestion des Enseignants</h2>
-      <!-- Bouton pour ouvrir le modal d'ajout -->
       <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addTeacherModal">
         <i class="bi bi-plus-circle me-2"></i>Ajouter un enseignant
       </button>
@@ -48,7 +54,6 @@
           <th>Nom</th>
           <th>Prénom</th>
           <th>Date de Naissance</th>
-          <th>Genre</th>
           <th>Adresse</th>
           <th>Téléphone</th>
           <th>Salle</th>
@@ -58,27 +63,6 @@
       </thead>
       <tbody>
         <!-- Les lignes des enseignants seront insérées ici dynamiquement via PHP -->
-        <tr>
-          <td>1</td>
-          <td>TCH001</td>
-          <td>Dupont</td>
-          <td>Jean</td>
-          <td>1980-01-15</td>
-          <td>M</td>
-          <td>10 rue de Paris</td>
-          <td>+33 123 456 789</td>
-          <td>101</td>
-          <td>2024-11-11 10:00:00</td>
-          <td>
-            <button class="btn btn-sm btn-warning">
-              <i class="bi bi-pencil-fill"></i> Modifier
-            </button>
-            <button class="btn btn-sm btn-danger">
-              <i class="bi bi-trash-fill"></i> Supprimer
-            </button>
-          </td>
-        </tr>
-        <!-- Autres enseignants... -->
       </tbody>
     </table>
   </div>
@@ -92,43 +76,43 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="addTeacherForm">
+          <form id="addTeacherForm" action="../../controllers/teacherctrl.php" method="POST">
             <div class="mb-3">
               <label for="teacherMat" class="form-label">Matricule</label>
-              <input type="text" class="form-control" id="teacherMat" required>
+              <input type="text" class="form-control" id="teacherMat" name="teacherMat" required>
             </div>
             <div class="mb-3">
               <label for="nom" class="form-label">Nom</label>
-              <input type="text" class="form-control" id="nom" required>
+              <input type="text" class="form-control" id="nom" name="nom" required>
             </div>
             <div class="mb-3">
               <label for="prenom" class="form-label">Prénom</label>
-              <input type="text" class="form-control" id="prenom" required>
+              <input type="text" class="form-control" id="prenom" name="prenom" required>
             </div>
             <div class="mb-3">
               <label for="datenaiss" class="form-label">Date de Naissance</label>
-              <input type="date" class="form-control" id="datenaiss" required>
-            </div>
-            <div class="mb-3">
-              <label for="genre" class="form-label">Genre</label>
-              <select class="form-control" id="genre" required>
-                <option value="M">Masculin</option>
-                <option value="F">Féminin</option>
-              </select>
+              <input type="date" class="form-control" id="datenaiss" name="datenaiss" required>
             </div>
             <div class="mb-3">
               <label for="adresse" class="form-label">Adresse</label>
-              <input type="text" class="form-control" id="adresse" required>
+              <input type="text" class="form-control" id="adresse" name="adresse" required>
             </div>
             <div class="mb-3">
               <label for="numTel" class="form-label">Téléphone</label>
-              <input type="text" class="form-control" id="numTel" required>
+              <input type="text" class="form-control" id="numTel" name="numTel" required>
             </div>
             <div class="mb-3">
               <label for="idsalle" class="form-label">Salle</label>
-              <input type="number" class="form-control" id="idsalle">
+              <select class="form-select" id="idsalle" name="idsalle">
+                <option value="" selected>Aucune</option>
+                <?php foreach ($SalleData as $salle): ?>
+                  <option value="<?= $salle['idsalle']; ?>">
+                    <?= htmlspecialchars($salle['idsalle'] . ' - ' . $salle['nom'] . ' ' . $salle['numSalle']); ?>
+                  </option>
+                <?php endforeach; ?>
+              </select>
             </div>
-            <button type="submit" class="btn btn-primary">Ajouter</button>
+            <button type="submit " name="addTeacher" class="btn btn-primary">Ajouter</button>
           </form>
         </div>
       </div>
@@ -136,14 +120,6 @@
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Placeholder pour gérer la soumission du formulaire
-    document.getElementById('addTeacherForm').addEventListener('submit', function(event) {
-      event.preventDefault();
-      alert('Nouvel enseignant ajouté avec succès!');
-      const modal = bootstrap.Modal.getInstance(document.getElementById('addTeacherModal'));
-      modal.hide();
-    });
-  </script>
+ 
 </body>
 </html>
