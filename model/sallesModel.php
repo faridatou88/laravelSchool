@@ -11,7 +11,7 @@ class Salle {
 
     // Ajouter une salle
     public function addSalle($nom, $numSalle) {
-        $query = "INSERT INTO salles (nom, numSalle) VALUES (:nom, :numSalle)";
+        $query = "INSERT INTO salle (nom, numSalle) VALUES (:nom, :numSalle)";
         $stmt = $this->connexion->prepare($query);
         $stmt->execute([
             "nom" => $nom,
