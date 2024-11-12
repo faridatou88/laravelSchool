@@ -8,7 +8,7 @@ $salle = new Salle();
 $SalleData = $salle->getAllSalles();
 
 // Charger les étudiants
-$studentModel = new Student();
+$studentModel = new Students();
 $studentsData = $studentModel->getAllStudents();
 ?>
 
