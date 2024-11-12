@@ -1,8 +1,15 @@
 <?php
 require_once __DIR__ . '/../../config/provider.php';
 require_once __DIR__ . '/../../model/sallesModel.php';
+require_once __DIR__ . '/../../model/teacherModel.php';
+
+// Obtenir toutes les salles pour le formulaire de sélection de salle
 $salle = new Salle();
 $SalleData = $salle->getAllSalles();
+
+// Obtenir tous les enseignants pour les afficher dans le tableau
+$teacher = new Teacher();
+$teachersData = $teacher->getAllTeachers();
 ?>
 
 <!DOCTYPE html>
@@ -62,7 +69,27 @@ $SalleData = $salle->getAllSalles();
         </tr>
       </thead>
       <tbody>
-        <!-- Les lignes des enseignants seront insérées ici dynamiquement via PHP -->
+        <?php foreach ($teachersData as $teacher): ?>
+          <tr>
+            <td><?= htmlspecialchars($teacher['idTeacher']); ?></td>
+            <td><?= htmlspecialchars($teacher['teacherMat']); ?></td>
+            <td><?= htmlspecialchars($teacher['nom']); ?></td>
+            <td><?= htmlspecialchars($teacher['prenom']); ?></td>
+            <td><?= htmlspecialchars($teacher['datenaiss']); ?></td>
+            <td><?= htmlspecialchars($teacher['adresse']); ?></td>
+            <td><?= htmlspecialchars($teacher['numTel']); ?></td>
+            <td><?= htmlspecialchars($teacher['idsalle']); ?></td>
+            <td><?= htmlspecialchars($teacher['created_at']); ?></td>
+            <td>
+              <button class="btn btn-sm btn-warning">
+                <i class="bi bi-pencil-fill"></i> Modifier
+              </button>
+              <button class="btn btn-sm btn-danger">
+                <i class="bi bi-trash-fill"></i> Supprimer
+              </button>
+            </td>
+          </tr>
+        <?php endforeach; ?>
       </tbody>
     </table>
   </div>
@@ -112,7 +139,7 @@ $SalleData = $salle->getAllSalles();
                 <?php endforeach; ?>
               </select>
             </div>
-            <button type="submit " name="addTeacher" class="btn btn-primary">Ajouter</button>
+            <button type="submit" name="addTeacher" class="btn btn-primary">Ajouter</button>
           </form>
         </div>
       </div>
@@ -120,6 +147,5 @@ $SalleData = $salle->getAllSalles();
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
- 
 </body>
 </html>
