@@ -10,12 +10,12 @@ class Cours {
     }
 
     // Ajouter un cours
-    public function addCours($nomCours, $idTeacher, $idsalle) {
-        $query = "INSERT INTO cours (nomCours, idTeacher, idsalle) VALUES (:nomCours, :idTeacher, :idsalle)";
+    public function addCours($nomCours, $nbreHeure, $idsalle) {
+        $query = "INSERT INTO cours (nomCours, nbreHeure, idsalle) VALUES (:nomCours, :nbreHeure, :idsalle)";
         $stmt = $this->connexion->prepare($query);
         $stmt->execute([
             "nomCours" => $nomCours,
-            "idTeacher" => $idTeacher,
+            "nbreHeure" => $nbreHeure,
             "idsalle" => $idsalle
         ]);
         return $stmt->rowCount();

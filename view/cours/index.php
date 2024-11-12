@@ -89,7 +89,7 @@ $SalleData = $salle->getAllSalles();
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form id="courseForm" action="../../controllers/coursectrl.php" method="POST">
+          <form id="courseForm" action="../../controllers/coursctrl.php" method="POST">
             <div class="mb-3">
               <label for="nomCours" class="form-label">Nom du Cours</label>
               <input type="text" class="form-control" id="nomCours" name="nomCours" required>
@@ -116,10 +116,13 @@ $SalleData = $salle->getAllSalles();
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    document.getElementById('courseForm').addEventListener('submit', function(event) {
+    // Placeholder pour gérer la soumission du formulaire
+    document.getElementById('addCourse').addEventListener('submit', function(event) {
       event.preventDefault();
-      alert('Nouveau cours ajouté avec succès!');
-      const modal = bootstrap.Modal.getInstance(document.getElementById('addCourseModal'));
+      alert('Nouvelle salle ajoutée avec succès!');
+      // Insère le code ici pour ajouter la salle via PHP ou JavaScript dynamique
+      // Ferme le modal après la soumission
+      const modal = bootstrap.Modal.getInstance(document.getElementById('addCourse'));
       modal.hide();
     });
   </script>
