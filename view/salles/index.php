@@ -1,3 +1,14 @@
+<?php 
+require_once __DIR__ . '/../../config/provider.php';
+require_once __DIR__ . '/../../model/sallesModel.php';
+
+
+$salle = new Salle();
+$SalleData = $salle->getAllSalles();
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -52,11 +63,12 @@
       </thead>
       <tbody>
         <!-- Les lignes des salles de classe seront insérées ici dynamiquement via PHP -->
+        <?php foreach ($SalleData as $salle): ?>
         <tr>
-          <td>1</td>
-          <td>Salle A</td>
-          <td>101</td>
-          <td>2024-11-11 10:00:00</td>
+          <td><?=$salle['idsalle']?></td>
+          <td><?=$salle['nom']?></td>
+          <td><?=$salle['numSalle']?></td>
+          <td><?=$salle['created_at']?></td>
           <td>
             <button class="btn btn-sm btn-warning">
               <i class="bi bi-pencil-fill"></i> Modifier
@@ -66,6 +78,8 @@
             </button>
           </td>
         </tr>
+        <?php endforeach; ?>
+
         <!-- Autres salles de classe... -->
       </tbody>
     </table>
@@ -103,6 +117,8 @@
       event.preventDefault();
       alert('Nouvelle salle ajoutée avec succès!');
       // Insère le code ici pour ajouter la salle via PHP ou JavaScript dynamique
+     
+                
       // Ferme le modal après la soumission
       const modal = bootstrap.Modal.getInstance(document.getElementById('addRoomModal'));
       modal.hide();
