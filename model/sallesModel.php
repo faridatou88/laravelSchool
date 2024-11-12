@@ -21,7 +21,7 @@ class Salle {
 
     // Récupérer toutes les salles
     public function getAllSalles() {
-        $query = "SELECT * FROM salles";
+        $query = "SELECT * FROM salle";
         $stmt = $this->connexion->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

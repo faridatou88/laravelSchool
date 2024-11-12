@@ -1,5 +1,7 @@
 <?php
-require_once __DIR__ . '/../config/provider.php';
+require_once __DIR__ . '/../../config/provider.php';
+require_once __DIR__ . '/../../model/sallesModel.php';
+
 $salle = new Salle();
 $SalleData = $salle->getAllSalles();
 ?>
