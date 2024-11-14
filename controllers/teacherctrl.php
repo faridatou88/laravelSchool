@@ -3,6 +3,19 @@ require_once __DIR__ . '/../config/provider.php';
 require_once __DIR__ . '/../model/sallesModel.php';
 require_once __DIR__ . '/../model/teacherModel.php';
 
+
+if(isset($_GET['id'])) {
+    $id=$_GET['id'];
+
+    $teacher = new Teacher();
+    $delete = $teacher->deleteTeacher($id);
+    if ($delete) {
+        header('Location: ../view/teachers/index.php');
+        exit();
+    }
+    # code...
+}
+
 if (isset($_POST['addTeacher'])) {
     $matricule = htmlspecialchars($_POST['teacherMat']);
     $nom= htmlspecialchars($_POST['nom']);

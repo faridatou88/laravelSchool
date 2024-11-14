@@ -84,8 +84,9 @@ $teachersData = $teacher->getAllTeachers();
               <button class="btn btn-sm btn-warning">
                 <i class="bi bi-pencil-fill"></i> Modifier
               </button>
-              <button class="btn btn-sm btn-danger">
-                <i class="bi bi-trash-fill"></i> Supprimer
+              <a href="../../controllers/teacherctrl.php?id=<?=$teacher['idTeacher']; ?>" class="btn btn-sm btn-danger" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cet étudiant ?');">
+    <i class="bi bi-trash-fill"></i> Supprimer
+</a>
               </button>
             </td>
           </tr>
