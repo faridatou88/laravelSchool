@@ -1,5 +1,5 @@
 <?php
-require_once("config/provider.php");
+require_once __DIR__ . '/../config/provider.php';
 
 class Students {
     private $connexion;
@@ -7,13 +7,13 @@ class Students {
     function __construct(){
         // On initialise la connexion à la base de données
         $db = new Database();
-        $this->connexion = $db->connect();
+        $this->connexion =Database::connect();
     }
 
     // Inscription d'un étudiant
-    public function inscription($matricule, $nom, $prenom, $datenaiss, $lieunaiss, $sexe, $nationality, $adresse, $numtel, $idsalle) {
-        $query = "INSERT INTO students (studentMat, nom, prenom, datenaiss, lieunaiss, sexe, nationality, adresse, numTel, idsalle)
-                  VALUES (:studentMat, :nom, :prenom, :datenaiss, :lieunaiss, :sexe, :nationality, :adresse, :numtel, :idsalle)";
+    public function inscription($matricule, $nom, $prenom, $datenaiss, $lieunaiss, $nationality, $adresse, $numtel, $idsalle) {
+        $query = "INSERT INTO student(studentMat, nom, prenom, datenaiss, lieunaiss, nationality, adresse, numTel, idsalle)
+                  VALUES (:studentMat, :nom, :prenom, :datenaiss, :lieunaiss, :nationality, :adresse, :numtel, :idsalle)";
         $stmt = $this->connexion->prepare($query);
         $stmt->execute([
             "studentMat" => $matricule,
@@ -21,7 +21,6 @@ class Students {
             "prenom" => $prenom,
             "datenaiss" => $datenaiss,
             "lieunaiss" => $lieunaiss,
-            "sexe" => $sexe,
             "nationality" => $nationality,
             "adresse" => $adresse,
             "numtel" => $numtel,
@@ -32,7 +31,7 @@ class Students {
 
     // Récupérer tous les étudiants
     public function getAllStudents() {
-        $query = "SELECT * FROM students";
+        $query = "SELECT * FROM student";
         $stmt = $this->connexion->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

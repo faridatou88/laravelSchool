@@ -8,6 +8,7 @@ require_once __DIR__ . '/../../model/studentModel.php';
 $salle = new Salle();
 $SalleData = $salle->getAllSalles();
 
+
 // Charger les étudiants
 $studentModel = new Students();
 $studentsData = $studentModel->getAllStudents();
