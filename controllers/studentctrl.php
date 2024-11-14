@@ -3,8 +3,18 @@ require_once __DIR__ . '/../config/provider.php';
 require_once __DIR__ . '/../controllers/sallectrl.php';
 require_once __DIR__ . '/../model/studentModel.php';
 
-// Initialiser le modèle Student
 
+if (isset($_GET['id'])) {
+    $id=$_GET['id'];
+
+    $student = new Students();
+    $delete = $student->deleteStudent($id);
+    if ($delete) {
+        header('Location: ../view/students/index.php');
+        exit();
+    }
+    # code...
+}
 
 // Vérifier l'action demandée via le formulaire
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

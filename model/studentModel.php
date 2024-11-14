@@ -69,7 +69,7 @@ class Students {
 
     // Supprimer un étudiant
     public function deleteStudent($id) {
-        $query = "DELETE FROM students WHERE idStudent = :id";
+        $query = "DELETE FROM student WHERE idStudent = :id";
         $stmt = $this->connexion->prepare($query);
         $stmt->execute(['id' => $id]);
         return $stmt->rowCount(); // Retourne 1 si la suppression a été réussie
