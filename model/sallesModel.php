@@ -49,7 +49,7 @@ class Salle {
 
     // Supprimer une salle
     public function deleteSalle($id) {
-        $query = "DELETE FROM salles WHERE idSalle = :id";
+        $query = "DELETE FROM salle WHERE idsalle = :id";
         $stmt = $this->connexion->prepare($query);
         $stmt->execute(['id' => $id]);
         return $stmt->rowCount();
